@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Section1Challenge from '@/components/Section1Challenge';
 import Section2Solution from '@/components/Section2Solution';
 import Section3Hardware from '@/components/Section3Hardware';
@@ -26,6 +26,11 @@ export default function Home() {
   const [completedSections, setCompletedSections] = useState<number[]>([]);
   const [presentationMode, setPresentationMode] = useState(false);
   const [assessmentScore, setAssessmentScore] = useState<number | null>(null);
+
+  // Scroll to top whenever section changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentSection]);
 
   const handleSectionComplete = (sectionId: number) => {
     if (!completedSections.includes(sectionId)) {

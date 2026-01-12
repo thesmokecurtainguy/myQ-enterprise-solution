@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ImagePlaceholder from './ImagePlaceholder';
 
 interface PresentationModeProps {
@@ -164,6 +164,11 @@ export default function PresentationMode({ onExit }: PresentationModeProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slide = slides[currentSlide];
+
+  // Scroll to top whenever slide changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentSlide]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight' || e.key === ' ') {
